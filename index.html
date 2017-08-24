@@ -1,11 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>BDO</title>
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript" src="tablequerywrapper.js"></script>
-<script type="text/javascript">
-    google.charts.load('current', {'packages' : ['table']});
+  <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+  <title>
+    Google Visualization API Sample
+  </title>
+
+  <script type="text/javascript"
+    src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <script type="text/javascript" src="tablequerywrapper.js"></script>
+  <script type="text/javascript">
+    google.charts.load('current', {packages: ['charteditor']});
+  </script>
+  <script type="text/javascript">
+
+ google.charts.load('current', {'packages' : ['table']});
     google.charts.setOnLoadCallback(init);
 
     var dataSourceUrl = 'https://docs.google.com/spreadsheets/d/1iAxLuHnkoBDEOjNfC9vbbsxltdcthQuJuGWee_jhO7U/edit?usp=sharing';
@@ -31,28 +41,85 @@
     }
 
 
- // google.charts.load('current');
- //  google.charts.setOnLoadCallback(drawVisualization);
 
- //  function drawVisualization() {
- //    var wrap = new google.visualization.ChartWrapper({
- //       'chartType':'ColumnChart',
- //       'dataSourceUrl':'https://docs.google.com/spreadsheets/d/1iAxLuHnkoBDEOjNfC9vbbsxltdcthQuJuGWee_jhO7U/edit?usp=sharing',
- //       'containerId':'visualization',
- //       'query':'SELECT B,D WHERE D > 0 ORDER BY D',
- //       'options': {'title':'BDO CHART', 'legend':'Ptarget'}
- //       });
- //     wrap.draw();
- //  }
+
+//GRAPH
+
+
+
+
+
+
+
+
+google.charts.load('current');
+  google.charts.setOnLoadCallback(drawVisualization);
+  google.charts.setOnLoadCallback(drawVisualization2);
+
+
+
+
+  function drawVisualization() {
+    var wrap = new google.visualization.ChartWrapper({
+       'chartType':'ColumnChart',
+       'dataSourceUrl':'https://docs.google.com/spreadsheets/d/1iAxLuHnkoBDEOjNfC9vbbsxltdcthQuJuGWee_jhO7U/edit?usp=sharing',
+       'containerId':'visualization',
+       'query': 'SELECT B,E WHERE E > 0',
+       'options': {'title':'BDO CTARGET', 'legend':'Q'}
+       });
+     wrap.draw();
+  }
+
+
+  function drawVisualization2() {
+    var wrap = new google.visualization.ChartWrapper({
+       'chartType':'ColumnChart',
+       'dataSourceUrl':'https://docs.google.com/spreadsheets/d/1iAxLuHnkoBDEOjNfC9vbbsxltdcthQuJuGWee_jhO7U/edit?usp=sharing',
+       'containerId':'visualization2',
+       'query': 'SELECT B,D WHERE D > 0',
+       'options': {'title':'BDO PTARGET', 'legend':'Q'}
+       });
+     wrap.draw();
+  }
+
+
+
+function myFunction() {
+    var vis1 = document.getElementById('visualization');
+    var vis2 = document.getElementById('visualization2');
+var sel = document.getElementById("choose");
+var text= sel.options[sel.selectedIndex].value;
+//alert(text);
+
+
+    if (text === 'visualization') {
+        vis1.style.display = 'block';
+        vis2.style.display = 'none';
+
+    } else if (text === 'visualization2') {
+        vis1.style.display = 'none';
+        vis2.style.display = 'block';
+
+    } else {
+
+       vis1.style.display = 'none';
+        vis2.style.display = 'none';
+    }
+
+
+}
+
+
+      
+
   </script>
 </head>
 <body>
-<p>This example uses the following spreadsheet: <br />
+<p>BDO SAMPLE GRAPH <br />
 
-</p>
 
 <form action="">
-  Number of rows to show:
+  Page:
   <select onChange="setOption('pageSize', parseInt(this.value, 10))">
     <option value="0">0</option>
     <option value="3">3</option>
@@ -61,9 +128,25 @@
     <option value="-1">-1</option>
   </select>
 </form>
+</div>
 <br />
 <div id="table"></div>
 
-  <div id="visualization" style="height: 400px; width: 800px;"></div>
+<p>Chosse graph to display </p>
+ <div style="display:block;"> 
+<select id ="choose" onchange="myFunction()">
+<option  value="none" ></option>
+    <option  value="visualization" >CTarget</option>
+    <option  value="visualization2" >PTarget</option>
+</select>
+
+<!-- <button onclick="myFunction()">Try it</button> -->
+<div style="width: 100%; overflow: hidden;">
+<div id="visualization" class ="graph" style="height: 400px; width: 600px;float: left;"></div>
+
+
+<div id="visualization2" class ="graph" style="height: 400px; width: 600px;margin-left: 620px;"></div>
+
+</div>
 </body>
 </html>
