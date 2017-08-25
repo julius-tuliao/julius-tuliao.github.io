@@ -54,60 +54,43 @@
 
 google.charts.load('current');
   google.charts.setOnLoadCallback(drawVisualization);
-  google.charts.setOnLoadCallback(drawVisualization2);
+  // google.charts.setOnLoadCallback(drawVisualization2);
+
+
+
+
 
 
 
 
   function drawVisualization() {
+
+
+var sel = document.getElementById("choose");
+var text= sel.options[sel.selectedIndex].value;
+var newQuery,title;
+
+  if (text === 'visualization'){
+  newQuery = 'SELECT B,E WHERE E > 0';
+  title = 'BDO CTarget' ;
+} else{
+
+  newQuery = 'SELECT B,D WHERE D > 0';
+  title = 'BDO PTarget' ;
+
+}
+
+
     var wrap = new google.visualization.ChartWrapper({
        'chartType':'ColumnChart',
        'dataSourceUrl':'https://docs.google.com/spreadsheets/d/1iAxLuHnkoBDEOjNfC9vbbsxltdcthQuJuGWee_jhO7U/edit?usp=sharing',
        'containerId':'visualization',
-       'query': 'SELECT B,E WHERE E > 0',
+       'query': newQuery,
        'options': {'title':'BDO CTARGET', 'legend':'Q'}
        });
      wrap.draw();
   }
 
-
-  function drawVisualization2() {
-    var wrap = new google.visualization.ChartWrapper({
-       'chartType':'ColumnChart',
-       'dataSourceUrl':'https://docs.google.com/spreadsheets/d/1iAxLuHnkoBDEOjNfC9vbbsxltdcthQuJuGWee_jhO7U/edit?usp=sharing',
-       'containerId':'visualization2',
-       'query': 'SELECT B,D WHERE D > 0',
-       'options': {'title':'BDO PTARGET', 'legend':'Q'}
-       });
-     wrap.draw();
-  }
-
-
-
-function myFunction() {
-    var vis1 = document.getElementById('visualization');
-    var vis2 = document.getElementById('visualization2');
-var sel = document.getElementById("choose");
-var text= sel.options[sel.selectedIndex].value;
-//alert(text);
-
-
-    if (text === 'visualization') {
-        vis1.style.display = 'block';
-        vis2.style.display = 'none';
-
-    } else if (text === 'visualization2') {
-        vis1.style.display = 'none';
-        vis2.style.display = 'block';
-
-    } else {
-
-       vis1.style.display = 'none';
-        vis2.style.display = 'none';
-    }
-
-
-}
 
 
       
@@ -134,7 +117,7 @@ var text= sel.options[sel.selectedIndex].value;
 
 <p>Chosse graph to display </p>
  <div style="display:block;"> 
-<select id ="choose" onchange="myFunction()">
+<select id ="choose" onchange="drawVisualization(this)">
 <option  value="none" ></option>
     <option  value="visualization" >CTarget</option>
     <option  value="visualization2" >PTarget</option>
@@ -145,7 +128,7 @@ var text= sel.options[sel.selectedIndex].value;
 <div id="visualization" class ="graph" style="height: 400px; width: 600px;float: left;"></div>
 
 
-<div id="visualization2" class ="graph" style="height: 400px; width: 600px;margin-left: 620px;"></div>
+<!-- <div id="visualization2" class ="graph" style="height: 400px; width: 600px;margin-left: 620px;"></div> -->
 
 </div>
 </body>
