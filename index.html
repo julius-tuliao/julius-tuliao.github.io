@@ -5,131 +5,69 @@
   <title>
     Google Visualization API Sample
   </title>
-
+  <link rel="stylesheet" type="text/css" href="graph.css">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+<!-- (Optional) Latest compiled and minified JavaScript translation files -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/i18n/defaults-*.min.js"></script>
   <script type="text/javascript"
     src="https://www.gstatic.com/charts/loader.js"></script>
-
-    <script type="text/javascript" src="tablequerywrapper.js"></script>
+<script type="text/javascript" src="tablequerywrapper.js"></script>
+<script type="text/javascript" src="google-chart.js"></script>
   <script type="text/javascript">
     google.charts.load('current', {packages: ['charteditor']});
   </script>
-  <script type="text/javascript">
-
- google.charts.load('current', {'packages' : ['table']});
-    google.charts.setOnLoadCallback(init);
-
-    var dataSourceUrl = 'https://docs.google.com/spreadsheets/d/1iAxLuHnkoBDEOjNfC9vbbsxltdcthQuJuGWee_jhO7U/edit?usp=sharing';
-    var query, options, container;
-
-    function init() {
-      query = new google.visualization.Query(dataSourceUrl);
-      container = document.getElementById("table");
-      options = {'pageSize': 5};
-      sendAndDraw();
-    }
-
-    function sendAndDraw() {
-      query.abort();
-      var tableQueryWrapper = new TableQueryWrapper(query, container, options);
-      tableQueryWrapper.sendAndDraw();
-    }
-
-
-    function setOption(prop, value) {
-      options[prop] = value;
-      sendAndDraw();
-    }
-
-
-
-
-//GRAPH
-
-
-
-
-
-
-
-
-google.charts.load('current');
-  google.charts.setOnLoadCallback(drawVisualization);
-  // google.charts.setOnLoadCallback(drawVisualization2);
-
-
-
-
-
-
-
-
-  function drawVisualization() {
-
-
-var sel = document.getElementById("choose");
-var text= sel.options[sel.selectedIndex].value;
-var newQuery,title;
-
-  if (text === 'visualization'){
-  newQuery = 'SELECT B,E WHERE E > 0';
-  title = 'BDO CTarget' ;
-} else{
-
-  newQuery = 'SELECT B,D WHERE D > 0';
-  title = 'BDO PTarget' ;
-
-}
-
-
-    var wrap = new google.visualization.ChartWrapper({
-       'chartType':'ColumnChart',
-       'dataSourceUrl':'https://docs.google.com/spreadsheets/d/1iAxLuHnkoBDEOjNfC9vbbsxltdcthQuJuGWee_jhO7U/edit?usp=sharing',
-       'containerId':'visualization',
-       'query': newQuery,
-       'options': {'title':title, 'legend':'Q'}
-       });
-     wrap.draw();
-  }
-
 
 
       
 
-  </script>
+
 </head>
-<body>
-<p>BDO SAMPLE GRAPH <br />
+<body >
 
 
-<form action="">
-  Page:
-  <select onChange="setOption('pageSize', parseInt(this.value, 10))">
+<div class="full">
+<h1 class="text-primary">BDO SAMPLE GRAPH </h1><br />
+</div>
+
+
+<div class ="pageNumber">
+ <label for="choosePage">Items to Display</label><br/>
+  <select   id ="choosePage" class="selectpicker"  data-live-search="true"  onChange="setOption('pageSize', parseInt(this.value, 10))">
     <option value="0">0</option>
     <option value="3">3</option>
     <option selected=selected value="5">5</option>
     <option value="8">8</option>
-    <option value="-1">-1</option>
+  
   </select>
-</form>
-</div>
-<br />
-<div id="table"></div>
 
-<p>Chosse graph to display </p>
- <div style="display:block;"> 
-<select id ="choose" onchange="drawVisualization(this)">
+</div>
+
+
+<br />
+<div id="table" class="table"></div>
+
+
+ <div class= "select" style="display:block;"> 
+  <label for="choose">Choose graph to display</label><br/>
+
+<select id ="choose" class="selectpicker"  data-live-search="true" onchange="drawVisualization(this)">
 <option  value="none" ></option>
     <option  value="visualization" >CTarget</option>
     <option  value="visualization2" >PTarget</option>
 </select>
 
 <!-- <button onclick="myFunction()">Try it</button> -->
-<div style="width: 100%; overflow: hidden;">
-<div id="visualization" class ="graph" style="height: 400px; width: 600px;float: left;"></div>
+<div id="visualization" class ="graph"></div>
 
 
 <!-- <div id="visualization2" class ="graph" style="height: 400px; width: 600px;margin-left: 620px;"></div> -->
 
-</div>
+
 </body>
 </html>
