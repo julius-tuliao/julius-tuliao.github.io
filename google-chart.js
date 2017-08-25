@@ -59,7 +59,7 @@ var newQuery,title;
        'containerId':'visualization',
        'query': newQuery,
        options: {
-    'title': ' BDO Data',
+    'title': ' Processed 2005-10',
     'hAxis': {title: 'Month', titleTextStyle: {color: 'black'}},
     'vAxis': {title: 'Tonnes', titleTextStyle: {color: 'black'}},
     'seriesType': 'bars',
