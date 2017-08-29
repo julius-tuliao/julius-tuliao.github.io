@@ -1,7 +1,5 @@
-<!DOCTYPE html>
 <html>
-<head>
-  <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+ <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
   <title>
     Google Visualization API Sample
   </title>
@@ -24,13 +22,98 @@
   </script>
 
 
-      
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+
+function initialize() {
+        var opts = {sendMethod: 'auto'};
+        // Replace the data source URL on next line with your data source URL.
+        var query = new google.visualization.Query('https://docs.google.com/spreadsheets/d/1iAxLuHnkoBDEOjNfC9vbbsxltdcthQuJuGWee_jhO7U/edit?usp=sharing', opts);         
+        
+        // var sel = document.getElementById("choose");
+// var text= sel.options[sel.selectedIndex].value;
+// var newQuery,title;
+
+//   if (text === 'visualization'){
+//   newQuery = 'SELECT B,E,F WHERE E > 0';
+//   title = 'BDO CTarget' ;
+// } else{
+
+//   newQuery = 'SELECT B,D,F WHERE D > 0';
+//   title = 'BDO PTarget' ;
+        // Optional request to return only column C and the sum of column B, grouped by C members.
+        query.setQuery('SELECT B,D,C WHERE D > 0');
+
+        // Send the query with a callback function.
+        query.send(handleQueryResponse);
+}
+
+function handleQueryResponse(response) {
+      if (response.isError()) {
+        alert('Error in query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
+        return;
+      }
 
 
-</head>
-<body >
+  var opts = {sendMethod: 'auto'};
+        // Replace the data source URL on next line with your data source URL.
+        var query = new google.visualization.Query('https://docs.google.com/spreadsheets/d/1iAxLuHnkoBDEOjNfC9vbbsxltdcthQuJuGWee_jhO7U/edit?usp=sharing', opts);         
+        
+        var sel = document.getElementById("choose");
+var text= sel.options[sel.selectedIndex].value;
+var newQuery,title;
+
+  if (text === 'visualization'){
+  newQuery = 'SELECT B,E,C WHERE E > 0';
+  title = 'BDO CTarget' ;
+} else{
+
+  newQuery = 'SELECT B,D,C WHERE D > 0';
+  title = 'BDO PTarget' ;}
+        // Optional request to return only column C and the sum of column B, grouped by C members.
+        query.setQuery(newQuery);
+
+        // Send the query with a callback function.
+        query.send(handleQueryResponse);
 
 
+    var data = response.getDataTable();
+
+  var options = {
+  title: 'Leads',
+          hAxis: {title: 'Month',showTextEvery: 1},
+          vAxes: {0: {viewWindowMode:'explicit',
+                      viewWindow:{
+                                  max:10013510,
+                                  min:82
+                                  },
+                      gridlines: {color: 'transparent'},
+                      title: title,
+                      },
+                  1: {gridlines: {color: 'transparent'},
+                   title: 'Agent Count',
+                      format:"#"},
+
+                  },
+           seriesType: 'bars',        
+          series: {0: {targetAxisIndex:0},
+                   1:{targetAxisIndex:1, type: 'line'},
+
+                   // 2:{targetAxisIndex:1},
+                  },
+          colors: ["lightBlue", "green", "orange"],
+          // chartArea:{left:100,top:100, width:500, height:150},
+  };
+
+  var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
+  chart.draw(data, options);
+}
+
+      google.setOnLoadCallback(initialize);
+</script>
+<body>
+  
 <div class="full">
 <h1 class="text-primary">BDO SAMPLE GRAPH </h1><br />
 </div>
@@ -60,14 +143,11 @@
 <option  value="none" ></option>
     <option  value="visualization" >CTarget</option>
     <option  value="visualization2" >PTarget</option>
-</select>
+</select> 
 
-<!-- <button onclick="myFunction()">Try it</button> -->
-<div id="visualization" class ="graph"></div>
-
-
-<!-- <div id="visualization2" class ="graph" style="height: 400px; width: 600px;margin-left: 620px;"></div> -->
-
-
+<div id="chart_div" class="graph"></div>
 </body>
+
 </html>
+
+
