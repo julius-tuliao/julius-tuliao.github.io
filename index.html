@@ -82,7 +82,24 @@ var newQuery,title;
 
   var options = {
   title: 'Leads',
-          hAxis: {title: 'Month',showTextEvery: 1},
+      backgroundColor: '#0d0d0d',
+   textStyle: {
+            color: 'grey'
+        },
+        titleTextStyle: {
+            color: 'grey'
+        },
+           legendTextStyle: {color:'grey'},
+          hAxis: {title: 'Month',showTextEvery: 1,
+        textStyle: {
+            color: 'grey'
+        },
+        titleTextStyle: {
+            color: 'grey'
+        },
+       
+    },
+
           vAxes: {0: {viewWindowMode:'explicit',
                       viewWindow:{
                                   max:10013510,
@@ -90,6 +107,13 @@ var newQuery,title;
                                   },
                       gridlines: {color: 'transparent'},
                       title: title,
+                      format:"#",
+                       textStyle: {
+            color: 'grey'
+        },
+        titleTextStyle: {
+            color: 'grey'
+        }
                       },
                   1: {viewWindowMode:'explicit',
                       viewWindow:{
@@ -97,18 +121,24 @@ var newQuery,title;
                                   min:0
                                   },
                     gridlines: {count: 8,color: 'transparent'},
+                     textStyle: {
+            color: 'grey'
+        },
+        titleTextStyle: {
+            color: 'grey'
+        },
                    title: 'Agent Count',
 
                       format:"#"},
 
                   },
-           seriesType: 'bars',        
+           seriesType: 'lineChart',        
           series: {0: {targetAxisIndex:0},
                    1:{targetAxisIndex:1, type: 'line'},
 
                    // 2:{targetAxisIndex:1},
                   },
-          colors: ["lightBlue", "green", "orange"],
+          colors: ["red", "blue", "orange"],
           // chartArea:{left:100,top:100, width:500, height:150},
   };
 
