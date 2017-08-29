@@ -91,8 +91,14 @@ var newQuery,title;
                       gridlines: {color: 'transparent'},
                       title: title,
                       },
-                  1: {gridlines: {color: 'transparent'},
+                  1: {viewWindowMode:'explicit',
+                      viewWindow:{
+                                  max:40,
+                                  min:0
+                                  },
+                    gridlines: {count: 8,color: 'transparent'},
                    title: 'Agent Count',
+
                       format:"#"},
 
                   },
